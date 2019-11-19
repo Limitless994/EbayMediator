@@ -1,11 +1,26 @@
 package MediatorElemnts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Seller extends User {
  
     private String nickName;
     private Mediator mediatore;
-     
-    public Seller(Mediator mediatore, String nickName) {
+    private List<String> products = new ArrayList<String>();
+    
+    public List<String> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<String> prodottiInVendita) {
+		this.products = prodottiInVendita;
+	}
+	public void addProduct(String prod) {
+		this.products.add(prod);
+	}
+	
+	public Seller(Mediator mediatore, String nickName) {
         this.mediatore = mediatore;
         this.nickName = nickName;
          

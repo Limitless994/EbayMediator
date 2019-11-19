@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EbayMediator extends Mediator {
+	
+	private EbayMediator() {};
+	private static EbayMediator m = new EbayMediator();
 
-	private List<Seller> sellers = new ArrayList<Seller>();
-	private List<Buyer> buyers = new ArrayList<Buyer>();
+	public List<Seller> sellers = new ArrayList<Seller>();
+	public List<Buyer> buyers = new ArrayList<Buyer>();
 
 	@Override
 	public void aggiungi(User s) {
@@ -23,5 +26,9 @@ public class EbayMediator extends Mediator {
 				u.vendi(prodotto, acquirente);
 			}
 		}
+
+	}
+	public static EbayMediator getInstance(){
+		return m;
 	}
 }

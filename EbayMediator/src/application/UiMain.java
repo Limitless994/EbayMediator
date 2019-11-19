@@ -1,7 +1,16 @@
 package application;
+import java.awt.Event;
+import java.awt.RenderingHints.Key;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.sun.glass.events.KeyEvent;
+
+import MediatorElemnts.EbayMediator;
+import MediatorElemnts.Mediator;
+import MediatorElemnts.Seller;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -23,37 +33,59 @@ public class UiMain implements Initializable {
 	@FXML
 	private ImageView preview;
 	@FXML
-	private Label cost;
+	private ListView<String> listview = new ListView<String>();
 	@FXML
-	private ChoiceBox<String> carSelector;
-	@FXML
-	private ChoiceBox<String> carSetup;
-	@FXML
-	private ListView<String> listview;
+	private ChoiceBox<String> sellerSelector;
 
-	ObservableList<String> carList = FXCollections.observableArrayList();
-	ObservableList<String> setupList = FXCollections.observableArrayList();
-
+	ObservableList<String> sellerList = FXCollections.observableArrayList();
+	ObservableList<String> products = FXCollections.observableArrayList();
+	Mediator mediator = EbayMediator.getInstance();
 	private void loadData() {
-		carList.removeAll(carList);
-		carList.add("Suv");
-		carList.add("Hatchback");
-		carList.add("Coupe");
-		carList.add("Crossover");
-		carSelector.getItems().addAll(carList);
-		setupList.removeAll(setupList);
-		setupList.add("ATTIVA");
-		setupList.add("ELETTA");
-		setupList.add("FUTURA");
-		carSetup.getItems().addAll(setupList);
+		sellerList.removeAll(sellerList);
+		for(Seller s:EbayMediator.getInstance().sellers) {
+			sellerList.add(s.getNickName());
+		}
+		sellerSelector.getItems().addAll(sellerList);
+	}
+
+	public void loadList(ActionEvent event) throws Exception {
+		products.removeAll(products);
+		for(Seller s:EbayMediator.getInstance().sellers) {
+			if(s.getNickName()==sellerSelector.getValue()) {
+				products.addAll(s.getProducts());
+				listview.getSelectionModel().clearAndSelect(0);
+				System.out.println(listview.getSelectionModel().getSelectedItem());
+				preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
+
+
+			}
+		}
+	}
+
+	public void next(ActionEvent event) throws Exception {
+		if(!listview.getSelectionModel().isSelected(listview.getItems().size()-1)) {
+			listview.getSelectionModel().selectNext();
+			System.out.println(listview.getSelectionModel().getSelectedItem());
+			preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
+		}
+
+	}
+	public void previous(ActionEvent event) throws Exception {
+		if(!listview.getSelectionModel().isSelected(0)) {
+			listview.getSelectionModel().selectPrevious();
+			System.out.println(listview.getSelectionModel().getSelectedItem());
+			preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
+		}
+
+	}
+	public void buy(ActionEvent event) throws Exception {
+		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
+		listview.setItems(products);
+		loadData();
 	}
 
-
-	
 }
