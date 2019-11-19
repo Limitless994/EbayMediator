@@ -36,6 +36,8 @@ public class UiMain implements Initializable {
 	private ListView<String> listview = new ListView<String>();
 	@FXML
 	private ChoiceBox<String> sellerSelector;
+	@FXML
+	private Label userLogged;
 
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
@@ -85,6 +87,7 @@ public class UiMain implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
+		userLogged.setText(LoginWindow.getUserLogged().getNickName());
 		loadData();
 	}
 

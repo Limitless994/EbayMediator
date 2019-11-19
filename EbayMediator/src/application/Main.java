@@ -30,7 +30,7 @@ public class Main extends Application {
 		Mediator mediatore =  EbayMediator.getInstance();
 		Seller seller1 = new Seller( mediatore, "Seller1" );	
 		Seller seller2 = new Seller( mediatore, "Seller2" );	
-		//Buyer user = new Buyer(mediatore, "user","pass");
+		Buyer user = new Buyer(mediatore, "user","pass");
 		seller1.addProduct("sedia");
 		seller1.addProduct("lampada");
 		seller1.addProduct("Laptop");

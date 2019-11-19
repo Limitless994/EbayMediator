@@ -37,25 +37,23 @@ public class LoginWindow implements Initializable {
 	private TextField username;
 	@FXML
 	private TextField password;
-	
-	//private EbayMediator mediatore = EbayMediator.getInstance();
-	
-	//private static Buyer loggedUser = null ;
-	
+
+	private static Buyer loggedUser = null ;
+
 	public void Login(ActionEvent event) throws Exception {	
-			if(username.getText().equals("user") && password.getText().equals("pass")) {
+		for(Buyer b : EbayMediator.getInstance().buyers) {
+			if(username.getText().equals(b.getNickName()) && password.getText().equals(b.getPassword())) {
 				status.setText("Login Riuscito");
-				//loggedUser=b;
+				loggedUser=b;
 				Stage primaryStage = new Stage();
 				Parent root = FXMLLoader.load(getClass().getResource("/application/main.fxml"));
 				Scene scene = new Scene(root,1100,700);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				primaryStage.show();
-			}else {
-				status.setText("DATI NON VALIDI");
 			}
-		
+		}
+		status.setText("DATI NON VALIDI");
 	}
 
 	@Override
@@ -63,10 +61,10 @@ public class LoginWindow implements Initializable {
 
 	}
 
-//	public static Buyer getUserLogged() {
-//
-//		return loggedUser;
-//	}
+	public static Buyer getUserLogged() {
+
+		return loggedUser;
+	}
 
 }
 
@@ -109,7 +107,7 @@ public class LoginWindow implements Initializable {
 	private static TextField username;
 	@FXML
 	private TextField password;
-	
+
 	public void Login(ActionEvent event) throws Exception {
 		if(username.getText().equals("user")&& password.getText().equals("pass")) {
 			status.setText("Login Riuscito");
