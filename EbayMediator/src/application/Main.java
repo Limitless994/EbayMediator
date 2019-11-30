@@ -34,7 +34,7 @@ public class Main extends Application {
 		seller1.addProduct("sedia");
 		seller1.addProduct("lampada");
 		seller1.addProduct("Laptop");
-		
+		mediatore.transazione(seller1, "Sedia", user);
 		seller2.addProduct("smartphone");
 		launch(args);
 

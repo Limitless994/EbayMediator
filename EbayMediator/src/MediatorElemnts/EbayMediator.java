@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EbayMediator extends Mediator {
-	
+
 	private EbayMediator() {};
 	private static EbayMediator m = new EbayMediator();
 
@@ -21,12 +21,8 @@ public class EbayMediator extends Mediator {
 
 	@Override
 	public void transazione(Seller venditore, String prodotto, Buyer acquirente) {
-		for(Seller u: sellers){
-			if( u.getNickName().equals(venditore) ){
-				u.vendi(prodotto, acquirente);
-			}
-		}
-
+//		venditore.vendi(prodotto, acquirente);
+//		System.out.println("Venduto "+prodotto+" da " + venditore.getNickName() + " a "+acquirente.getNickName());
 	}
 	public static EbayMediator getInstance(){
 		return m;

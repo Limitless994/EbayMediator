@@ -38,10 +38,12 @@ public class UiMain implements Initializable {
 	private ChoiceBox<String> sellerSelector;
 	@FXML
 	private Label userLogged;
-
+	
+	
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
 	Mediator mediator = EbayMediator.getInstance();
+	Seller currentSeller;
 	private void loadData() {
 		sellerList.removeAll(sellerList);
 		for(Seller s:EbayMediator.getInstance().sellers) {
@@ -54,6 +56,7 @@ public class UiMain implements Initializable {
 		products.removeAll(products);
 		for(Seller s:EbayMediator.getInstance().sellers) {
 			if(s.getNickName()==sellerSelector.getValue()) {
+				currentSeller=s;
 				products.addAll(s.getProducts());
 				listview.getSelectionModel().clearAndSelect(0);
 				System.out.println(listview.getSelectionModel().getSelectedItem());
@@ -81,7 +84,8 @@ public class UiMain implements Initializable {
 
 	}
 	public void buy(ActionEvent event) throws Exception {
-		
+	//	EbayMediator.getInstance().transazione(currentSeller, listview.getSelectionModel().getSelectedItem(),LoginWindow.getUserLogged() );
+	currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), LoginWindow.getUserLogged());
 	}
 
 	@Override

@@ -17,5 +17,6 @@
       <Button layoutX="500.0" layoutY="321.0" mnemonicParsing="false" onAction="#previous" text="Previous" />
       <Label fx:id="userLogged" layoutX="99.0" layoutY="14.0" />
       <Label fx:id="status1" layoutX="30.0" layoutY="14.0" text="Welcome" />
+      <Button layoutX="548.0" layoutY="378.0" mnemonicParsing="false" onAction="#buy" text="Buy item" />
    </children>
 </AnchorPane>
