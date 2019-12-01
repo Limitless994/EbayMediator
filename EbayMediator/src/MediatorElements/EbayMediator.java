@@ -1,4 +1,4 @@
-package MediatorElemnts;
+package MediatorElements;
 
 import java.util.ArrayList;
 import java.util.List;

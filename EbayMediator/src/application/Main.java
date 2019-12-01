@@ -1,9 +1,9 @@
 package application;
 
-import MediatorElemnts.Buyer;
-import MediatorElemnts.EbayMediator;
-import MediatorElemnts.Mediator;
-import MediatorElemnts.Seller;
+import MediatorElements.Buyer;
+import MediatorElements.EbayMediator;
+import MediatorElements.Mediator;
+import MediatorElements.Seller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -28,8 +28,8 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		Mediator mediatore =  EbayMediator.getInstance();
-		Seller seller1 = new Seller( mediatore, "Seller1" );	
-		Seller seller2 = new Seller( mediatore, "Seller2" );	
+		Seller seller1 = new Seller( mediatore, "seller1","pass" );	
+		Seller seller2 = new Seller( mediatore, "seller2","pass" );	
 		Buyer user = new Buyer(mediatore, "user","pass");
 		seller1.addProduct("sedia");
 		seller1.addProduct("lampada");

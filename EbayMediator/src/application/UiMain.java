@@ -7,9 +7,10 @@ import java.util.ResourceBundle;
 
 import com.sun.glass.events.KeyEvent;
 
-import MediatorElemnts.EbayMediator;
-import MediatorElemnts.Mediator;
-import MediatorElemnts.Seller;
+import MediatorElements.Buyer;
+import MediatorElements.EbayMediator;
+import MediatorElements.Mediator;
+import MediatorElements.Seller;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,13 +86,13 @@ public class UiMain implements Initializable {
 	}
 	public void buy(ActionEvent event) throws Exception {
 	//	EbayMediator.getInstance().transazione(currentSeller, listview.getSelectionModel().getSelectedItem(),LoginWindow.getUserLogged() );
-	currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), LoginWindow.getUserLogged());
+	currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)ProxyEbayMediator.getUserLogged());
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
-		userLogged.setText(LoginWindow.getUserLogged().getNickName());
+		userLogged.setText(ProxyEbayMediator.getUserLogged().getNickName());
 		loadData();
 	}
 

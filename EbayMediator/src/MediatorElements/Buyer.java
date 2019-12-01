@@ -1,4 +1,4 @@
-package MediatorElemnts;
+package MediatorElements;
 
 public class Buyer extends User {
 
