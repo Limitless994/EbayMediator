@@ -11,6 +11,7 @@ import MediatorElements.Buyer;
 import MediatorElements.EbayMediator;
 import MediatorElements.Mediator;
 import MediatorElements.Seller;
+import MediatorElements.User;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +31,7 @@ import javafx.stage.Stage;
 
 
 
-public class UiMain implements Initializable {
+public class UiMainBuyer implements Initializable {
 	@FXML
 	private ImageView preview;
 	@FXML
@@ -39,8 +40,7 @@ public class UiMain implements Initializable {
 	private ChoiceBox<String> sellerSelector;
 	@FXML
 	private Label userLogged;
-	
-	
+
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
 	Mediator mediator = EbayMediator.getInstance();
@@ -61,38 +61,51 @@ public class UiMain implements Initializable {
 				products.addAll(s.getProducts());
 				listview.getSelectionModel().clearAndSelect(0);
 				System.out.println(listview.getSelectionModel().getSelectedItem());
-				preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
-
-
+				try{
+					preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".png"));
+				}catch(Exception e) {
+					preview.setImage(new Image("imageNotFound.png"));
+				}		
 			}
+
 		}
 	}
+
 
 	public void next(ActionEvent event) throws Exception {
 		if(!listview.getSelectionModel().isSelected(listview.getItems().size()-1)) {
 			listview.getSelectionModel().selectNext();
 			System.out.println(listview.getSelectionModel().getSelectedItem());
-			preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
-		}
-
+			try{
+				preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".png"));
+			}catch(Exception e) {
+				preview.setImage(new Image("imageNotFound.png"));
+			}		
+		}		
 	}
+
+
 	public void previous(ActionEvent event) throws Exception {
 		if(!listview.getSelectionModel().isSelected(0)) {
 			listview.getSelectionModel().selectPrevious();
 			System.out.println(listview.getSelectionModel().getSelectedItem());
-			preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".jpg"));
-		}
-
+			try{
+				preview.setImage(new Image(listview.getSelectionModel().getSelectedItem()+".png"));
+			}catch(Exception e) {
+				preview.setImage(new Image("imageNotFound.png"));
+			}		
+		}		
 	}
+
 	public void buy(ActionEvent event) throws Exception {
-	//	EbayMediator.getInstance().transazione(currentSeller, listview.getSelectionModel().getSelectedItem(),LoginWindow.getUserLogged() );
-	currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)ProxyEbayMediator.getUserLogged());
+		//	EbayMediator.getInstance().transazione(currentSeller, listview.getSelectionModel().getSelectedItem(),LoginWindow.getUserLogged() );
+		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)EbayMediatorProtectionProxy.getUserLogged());
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
-		userLogged.setText(ProxyEbayMediator.getUserLogged().getNickName());
+		userLogged.setText(EbayMediatorProtectionProxy.getUserLogged().getNickName());
 		loadData();
 	}
 

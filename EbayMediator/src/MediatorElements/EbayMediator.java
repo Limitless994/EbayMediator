@@ -5,7 +5,15 @@ import java.util.List;
 
 public class EbayMediator extends Mediator {
 
-	private EbayMediator() {};
+	private EbayMediator() {
+		System.out.println("NEW");
+		Seller seller1 = new Seller( this, "seller1","pass" );	
+		Seller seller2 = new Seller( this, "seller2","pass" );	
+		Buyer user = new Buyer(this, "user","pass");
+		seller1.addProduct("Sedia");
+		seller1.addProduct("Laptop");	
+		seller2.addProduct("Smartphone");
+	};
 	private static EbayMediator m = new EbayMediator();
 
 	public List<Seller> sellers = new ArrayList<Seller>();

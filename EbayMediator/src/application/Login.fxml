@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProxyEbayMediator">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EbayMediatorProtectionProxy">
    <children>
       <Button layoutX="121.0" layoutY="214.0" mnemonicParsing="false" onAction="#Login" text="Login" />
       <TextField fx:id="username" layoutX="69.0" layoutY="130.0" promptText="USERNAME" />

@@ -26,16 +26,6 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		
-		Mediator mediatore =  EbayMediator.getInstance();
-		Seller seller1 = new Seller( mediatore, "seller1","pass" );	
-		Seller seller2 = new Seller( mediatore, "seller2","pass" );	
-		Buyer user = new Buyer(mediatore, "user","pass");
-		seller1.addProduct("sedia");
-		seller1.addProduct("lampada");
-		seller1.addProduct("Laptop");
-		mediatore.transazione(seller1, "Sedia", user);
-		seller2.addProduct("smartphone");
 		launch(args);
 
 	}
