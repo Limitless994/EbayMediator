@@ -6,7 +6,7 @@ import java.util.List;
 public class EbayMediator extends Mediator {
 
 	private EbayMediator() {
-		System.out.println("NEW");
+		//System.out.println("NEW");
 		Seller seller1 = new Seller( this, "seller1","pass" );	
 		Seller seller2 = new Seller( this, "seller2","pass" );	
 		Buyer user = new Buyer(this, "user","pass");
