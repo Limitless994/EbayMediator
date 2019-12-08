@@ -98,14 +98,13 @@ public class UiMainBuyer implements Initializable {
 	}
 
 	public void buy(ActionEvent event) throws Exception {
-		//	EbayMediator.getInstance().transazione(currentSeller, listview.getSelectionModel().getSelectedItem(),LoginWindow.getUserLogged() );
-		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)EbayMediatorProtectionProxy.getUserLogged());
+		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)UiLogin.getUserLogged());
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
-		userLogged.setText(EbayMediatorProtectionProxy.getUserLogged().getNickName());
+		userLogged.setText(UiLogin.getUserLogged().getNickName());
 		loadData();
 	}
 

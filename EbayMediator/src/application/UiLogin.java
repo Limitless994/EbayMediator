@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 
 
-public class EbayMediatorProtectionProxy implements Initializable,EbayMediatorProxy {
+public class UiLogin implements Initializable {
 	@FXML
 	private Label status;
 	@FXML
