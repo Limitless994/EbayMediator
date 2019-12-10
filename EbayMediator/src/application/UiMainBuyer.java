@@ -1,18 +1,11 @@
 package application;
-import java.awt.Event;
-import java.awt.RenderingHints.Key;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.sun.glass.events.KeyEvent;
 
 import MediatorElements.Buyer;
 import MediatorElements.EbayMediator;
 import MediatorElements.Mediator;
 import MediatorElements.Seller;
-import MediatorElements.User;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,10 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -40,7 +33,11 @@ public class UiMainBuyer implements Initializable {
 	private ChoiceBox<String> sellerSelector;
 	@FXML
 	private Label userLogged;
-
+	@FXML
+	public Button button;
+	@FXML
+	public Button buyButton;
+	
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
 	Mediator mediator = EbayMediator.getInstance();
@@ -49,6 +46,8 @@ public class UiMainBuyer implements Initializable {
 		sellerList.removeAll(sellerList);
 		for(Seller s:EbayMediator.getInstance().sellers) {
 			sellerList.add(s.getNickName());
+			if(userLogged.getText().equals(s.getNickName()))
+				sellerList.remove(s.getNickName());
 		}
 		sellerSelector.getItems().addAll(sellerList);
 	}
@@ -83,7 +82,15 @@ public class UiMainBuyer implements Initializable {
 			}		
 		}		
 	}
+	public void AddProductPopup(ActionEvent event) throws Exception {
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/mainSeller.fxml"));
+		Scene scene = new Scene(root,600,500);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
 
+	}
 
 	public void previous(ActionEvent event) throws Exception {
 		if(!listview.getSelectionModel().isSelected(0)) {
@@ -98,13 +105,18 @@ public class UiMainBuyer implements Initializable {
 	}
 
 	public void buy(ActionEvent event) throws Exception {
-		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)UiLogin.getUserLogged());
+		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)ProxyEbayMediator.getUserLogged());
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
-		userLogged.setText(UiLogin.getUserLogged().getNickName());
+		userLogged.setText(ProxyEbayMediator.getUserLogged().getNickName());
+		if(ProxyEbayMediator.getUserLogged() instanceof Seller) {
+			button.setVisible(true);
+			buyButton.setVisible(false);
+		}
+		else button.setVisible(false);
 		loadData();
 	}
 

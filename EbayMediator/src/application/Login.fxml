@@ -9,9 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UiLogin">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProxyEbayMediator">
    <children>
       <Button layoutX="121.0" layoutY="214.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <Button layoutX="114.0" layoutY="251.0" mnemonicParsing="false" onAction="#openRegisterWindow" text="Register" />
       <TextField fx:id="username" layoutX="69.0" layoutY="130.0" promptText="USERNAME" />
       <PasswordField fx:id="password" layoutX="69.0" layoutY="163.0" promptText="PASSWORD" />
       <Label layoutX="123.0" layoutY="27.0" text="Mediator Login">

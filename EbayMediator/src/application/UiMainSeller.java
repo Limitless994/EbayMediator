@@ -31,7 +31,7 @@ public class UiMainSeller implements Initializable {
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
 	Mediator mediator = EbayMediator.getInstance();
-	Seller s = (Seller)UiLogin.getUserLogged();
+	Seller s = (Seller)ProxyEbayMediator.getUserLogged();
 	boolean alreadyLoaded=false;
 
 	public void loadList(ActionEvent event) throws Exception {
@@ -82,7 +82,7 @@ public class UiMainSeller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listview.setItems(products);
-		userLogged.setText(UiLogin.getUserLogged().getNickName());
+		userLogged.setText(ProxyEbayMediator.getUserLogged().getNickName());
 	}
 
 }
