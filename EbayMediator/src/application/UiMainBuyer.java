@@ -37,7 +37,9 @@ public class UiMainBuyer implements Initializable {
 	public Button button;
 	@FXML
 	public Button buyButton;
-	
+	@FXML
+	public Label statusVendita;
+
 	ObservableList<String> sellerList = FXCollections.observableArrayList();
 	ObservableList<String> products = FXCollections.observableArrayList();
 	Mediator mediator = EbayMediator.getInstance();
@@ -53,6 +55,7 @@ public class UiMainBuyer implements Initializable {
 	}
 
 	public void loadList(ActionEvent event) throws Exception {
+		statusVendita.setText("");
 		products.removeAll(products);
 		for(Seller s:EbayMediator.getInstance().sellers) {
 			if(s.getNickName()==sellerSelector.getValue()) {
@@ -103,9 +106,11 @@ public class UiMainBuyer implements Initializable {
 			}		
 		}		
 	}
-
 	public void buy(ActionEvent event) throws Exception {
+		Buyer tmp=(Buyer)ProxyEbayMediator.getUserLogged();
 		currentSeller.vendi(listview.getSelectionModel().getSelectedItem(), (Buyer)ProxyEbayMediator.getUserLogged());
+		tmp.acquista(listview.getSelectionModel().getSelectedItem(), currentSeller);
+		statusVendita.setText( currentSeller.getNickName() + " ha venduto "+listview.getSelectionModel().getSelectedItem()+" a "+tmp.getNickName());
 	}
 
 	@Override

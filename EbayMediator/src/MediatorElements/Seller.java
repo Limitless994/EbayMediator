@@ -37,7 +37,7 @@ public class Seller extends User {
 		this.password = password;
 	}
 	public void vendi(String prodotto, Buyer acquirente) {
-		mediatore.transazione(this, prodotto, acquirente);
+		System.out.println("Venduto "+ prodotto + " a "+ acquirente.getNickName());
 	}
 
 	@Override

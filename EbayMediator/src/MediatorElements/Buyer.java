@@ -23,7 +23,7 @@ public class Buyer extends User {
 	}
 
 	public void acquista(String prodotto, Seller venditore) {
-		mediatore.transazione(venditore, prodotto, this);
+		System.out.println("Acquistato "+ prodotto + " venduto da "+ venditore.getNickName());
 
 	}
 

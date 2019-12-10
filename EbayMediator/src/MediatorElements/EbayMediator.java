@@ -3,6 +3,8 @@ package MediatorElements;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.UiMainBuyer;
+
 public class EbayMediator extends Mediator {
 
 	private EbayMediator() {
@@ -28,7 +30,10 @@ public class EbayMediator extends Mediator {
 
 	@Override
 	public void transazione(Seller venditore, String prodotto, Buyer acquirente) {
-		System.out.println("TRANSAZIONE TRA "+ venditore.getNickName() + " E "+acquirente.getNickName() +" OGGETTO: " +prodotto);
+					acquirente.acquista(prodotto, venditore);
+					venditore.vendi(prodotto, acquirente);
+					//UiMainBuyer.statusVendita.setText("TRANSAZIONE TRA "+ venditore.getNickName() + " E "+acquirente.getNickName() +" OGGETTO: " +prodotto);
+		//System.out.println("TRANSAZIONE TRA "+ venditore.getNickName() + " E "+acquirente.getNickName() +" OGGETTO: " +prodotto);
 	}
 	public static EbayMediator getInstance(){
 		return m;

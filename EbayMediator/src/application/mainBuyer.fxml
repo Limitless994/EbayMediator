@@ -20,5 +20,6 @@
       <Button fx:id="buyButton" layoutX="295.0" layoutY="449.0" mnemonicParsing="false" onAction="#buy" text="Buy item" />
       <Label fx:id="status11" layoutX="55.0" layoutY="68.0" text="Select a Seller" />
       <Button fx:id="button" layoutX="426.0" layoutY="56.0" mnemonicParsing="false" onAction="#AddProductPopup" text="Seller control panel" />
+      <Label fx:id="statusVendita" layoutX="55.0" layoutY="126.0" prefHeight="25.0" prefWidth="489.0" />
    </children>
 </AnchorPane>
